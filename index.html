@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="600"> 
+    <title>세종캠퍼스고등학교 안내</title>
+    <style>
+        :root {
+            --main-blue: #000066;
+            --point-blue: #0070c0;
+            --point-gold: #ffc000;
+            --bg-light: #f4f7fa;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* 대형 화면에서 스크롤바 방지 */
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 30px 60px;
+            display: flex;
+            align-items: center;
+            border-bottom: 3px solid var(--main-blue);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .logo-img { height: 80px; width: auto; }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #eef2f7 100%);
+        }
+
+        .welcome-title {
+            font-size: 4rem; /* 대형 화면을 위해 크기 확대 */
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            word-break: keep-all;
+        }
+
+        .slogan-box {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #333;
+            line-height: 1.5;
+            word-break: keep-all;
+        }
+
+        .highlight-blue { color: var(--point-blue); }
+        .highlight-gold { color: var(--point-gold); }
+
+        .bottom-nav {
+            background-color: #ffffff;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            border-top: 1px solid #ddd;
+        }
+
+        .nav-btn {
+            width: 320px;
+            padding: 30px;
+            border-radius: 20px;
+            color: white;
+            border: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.25); }
+        .btn-blue { background-color: #2563eb; }
+        .btn-orange { background-color: #ea580c; }
+        .btn-indigo { background-color: #4f46e5; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="국문형_가로.png" alt="세종캠퍼스고등학교 로고" class="logo-img">
+    </header>
+
+    <main class="main-container">
+        <h1 class="welcome-title">세종캠퍼스고등학교 방문을<br>진심으로 환영합니다</h1>
+        <div class="slogan-box">
+            저마다의 <span class="highlight-blue">빛깔</span>을 찾아<br>
+            모두가 <span class="highlight-gold">특별</span>해지는 다채로운 배움터
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <button onclick="window.open('https://www.schoolinfo.go.kr/ei/ss/Pneiss_b01_s0.do?SHL_IDF_CD=3aaa3131-652e-4ac3-9219-8e628f474f0e', 'pop1', 'width=1200,height=900,scrollbars=yes');" class="nav-btn btn-blue">학교정보</button>
+        <button onclick="window.open('https://drive.google.com/file/d/1Qp-rj9DwZk3KImYj-MKpgpJu8k6AhuEB/view?usp=drive_link', 'pop2', 'width=1200,height=900,scrollbars=yes');" class="nav-btn btn-orange">교내배치도</button>
+        <button onclick="window.open('https://sejongcampus.sjeduhs.kr/sejongcampus-h/main.do', 'pop3', 'width=1280,height=900,scrollbars=yes');" class="nav-btn btn-indigo">홈페이지</button>
+    </nav>
+
+</body>
+</html>
