@@ -14,45 +14,110 @@
         }
 
         body, html {
-            margin: 0; padding: 0; height: 100%;
+            margin: 0;
+            padding: 0;
+            height: 100%;
             font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
             background-color: var(--bg-light);
-            display: flex; flex-direction: column; overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* 대형 화면에서 불필요한 스크롤바를 방지합니다. */
         }
 
+        /* 상단 헤더 영역 */
         header {
-            background-color: #ffffff; padding: 30px 60px;
-            display: flex; align-items: center;
+            background-color: #ffffff;
+            padding: 30px 60px;
+            display: flex;
+            align-items: center;
             border-bottom: 3px solid var(--main-blue);
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        .logo-img { height: 80px; width: auto; }
-
-        .main-container {
-            flex: 1; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            padding: 40px; background: linear-gradient(135deg, #ffffff 0%, #eef2f7 100%);
+        .logo-img {
+            height: 80px; /* 대형 디스플레이에 맞춰 로고 크기를 조정했습니다. */
+            width: auto;
         }
 
-        .welcome-title { font-size: 4rem; font-weight: 900; color: #1a1a1a; margin-bottom: 30px; letter-spacing: -2px; word-break: keep-all; }
-        .slogan-box { font-size: 2.8rem; font-weight: 800; color: #333; line-height: 1.5; word-break: keep-all; }
+        /* 메인 콘텐츠 영역 */
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #eef2f7 100%);
+        }
+
+        .welcome-title {
+            font-size: 4.5rem; /* 대형 화면 가시성을 위해 폰트 크기를 확대했습니다. */
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            word-break: keep-all;
+        }
+
+        .slogan-box {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #333;
+            line-height: 1.5;
+            word-break: keep-all;
+        }
+
         .highlight-blue { color: var(--point-blue); }
         .highlight-gold { color: var(--point-gold); }
 
-        .bottom-nav { background-color: #ffffff; padding: 40px; display: flex; justify-content: center; gap: 40px; border-top: 1px solid #ddd; }
-        .nav-btn { width: 320px; padding: 30px; border-radius: 20px; color: white; border: none; font-size: 1.8rem; font-weight: bold; cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: all 0.3s; }
-        .nav-btn:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.25); }
-        
-        .btn-blue { background-color: #2563eb; }
+        /* 하단 버튼 네비게이션 */
+        .bottom-nav {
+            background-color: #ffffff;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            border-top: 1px solid #ddd;
+        }
+
+        .nav-btn {
+            width: 350px;
+            padding: 35px;
+            border-radius: 25px;
+            color: white;
+            border: none;
+            font-size: 2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .btn-blue { background-color: #1e40af; }
         .btn-orange { background-color: #ea580c; }
-        .btn-indigo { background-color: #4f46e5; }
+        .btn-indigo { background-color: #4338ca; }
+
+        /* 반응형 대응 (필요 시) */
+        @media (max-width: 1200px) {
+            .welcome-title { font-size: 3rem; }
+            .slogan-box { font-size: 2rem; }
+            .nav-btn { width: 280px; font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="123.png" alt="세종캠퍼스고등학교 로고" class="logo-img">
+        <img src="https://github.com/user-attachments/assets/534ceff2-2513-463f-a7da-ab6bb231f47c" 
+             alt="세종캠퍼스고등학교 로고" 
+             class="logo-img">
     </header>
 
     <main class="main-container">
@@ -64,9 +129,11 @@
     </main>
 
     <nav class="bottom-nav">
-        <button onclick="window.open('https://www.schoolinfo.go.kr/ei/ss/Pneiss_b01_s0.do?SHL_IDF_CD=3aaa3131-652e-4ac3-9219-8e628f474f0e', 'pop1', 'width=1200,height=900,scrollbars=yes');" class="nav-btn btn-blue">학교정보</button>
-        <button onclick="window.open('https://drive.google.com/file/d/1Qp-rj9DwZk3KImYj-MKpgpJu8k6AhuEB/view?usp=drive_link', 'pop2', 'width=1200,height=900,scrollbars=yes');" class="nav-btn btn-orange">교내배치도</button>
-        <button onclick="window.open('https://sejongcampus.sjeduhs.kr/sejongcampus-h/main.do', 'pop3', 'width=1280,height=900,scrollbars=yes');" class="nav-btn btn-indigo">홈페이지</button>
+        <button onclick="window.open('https://www.schoolinfo.go.kr/ei/ss/Pneiss_b01_s0.do?SHL_IDF_CD=3aaa3131-652e-4ac3-9219-8e628f474f0e', 'SchoolInfo', 'width=1200,height=900,scrollbars=yes');" class="nav-btn btn-blue">학교정보</button>
+        
+        <button onclick="window.open('https://drive.google.com/file/d/1Qp-rj9DwZk3KImYj-MKpgpJu8k6AhuEB/view?usp=drive_link', 'FloorPlan', 'width=1200,height=900,scrollbars=yes');" class="nav-btn btn-orange">교내배치도</button>
+        
+        <button onclick="window.open('https://sejongcampus.sjeduhs.kr/sejongcampus-h/main.do', 'OfficialHome', 'width=1280,height=900,scrollbars=yes');" class="nav-btn btn-indigo">홈페이지</button>
     </nav>
 
 </body>
