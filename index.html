@@ -6,7 +6,6 @@
     <meta http-equiv="refresh" content="600">
     <title>세종캠퍼스고등학교 | 안내</title>
     <style>
-        /* 현대적이고 가독성이 뛰어난 프리텐다드 서체 적용 */
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
         :root {
@@ -16,108 +15,22 @@
             --bg-color: #ffffff;
         }
 
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body, html { height: 100%; font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); color: var(--text-main); overflow: hidden; display: flex; flex-direction: column; }
 
-        body, html {
-            height: 100%;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+        header { width: 100%; padding-top: 80px; display: flex; justify-content: center; z-index: 10; }
+        .logo-img { height: 75px; width: auto; }
 
-        /* 1. 상단: 로고 영역 */
-        header {
-            width: 100%;
-            padding-top: 80px;
-            display: flex;
-            justify-content: center;
-            z-index: 10;
-        }
+        .hero-container { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 40px; }
+        .welcome-title { font-size: 6.8rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.04em; margin-bottom: 45px; word-break: keep-all; }
+        .slogan-box { font-size: 2.7rem; font-weight: 300; color: var(--text-sub); letter-spacing: -0.01em; word-break: keep-all; }
+        .slogan-box b { font-weight: 600; color: var(--accent-blue); }
 
-        .logo-img {
-            height: 75px;
-            width: auto;
-        }
+        nav { width: 100%; padding-bottom: 110px; display: flex; justify-content: center; gap: 55px; z-index: 10; }
+        .nav-btn { all: unset; width: 300px; height: 105px; border-radius: 28px; background: #f5f5f7; font-size: 1.5rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
+        .nav-btn:hover { background: var(--text-main); color: #ffffff; transform: translateY(-10px); box-shadow: 0 40px 80px rgba(0,0,0,0.08); }
 
-        /* 2. 중앙: 히어로 문구 (완벽한 중앙 정렬 및 크기 최적화) */
-        .hero-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 40px;
-        }
-
-        .welcome-title {
-            font-size: 6.8rem; /* 대형 화면에서 압도적인 가독성을 제공하는 크기 */
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -0.04em;
-            margin-bottom: 45px;
-            word-break: keep-all;
-        }
-
-        .slogan-box {
-            font-size: 2.7rem; 
-            font-weight: 300;
-            color: var(--text-sub);
-            letter-spacing: -0.01em;
-            word-break: keep-all;
-        }
-
-        .slogan-box b {
-            font-weight: 600;
-            color: var(--accent-blue);
-        }
-
-        /* 3. 하단: 네비게이션 버튼 영역 */
-        nav {
-            width: 100%;
-            padding-bottom: 110px;
-            display: flex;
-            justify-content: center;
-            gap: 55px;
-            z-index: 10;
-        }
-
-        .nav-btn {
-            all: unset;
-            width: 300px;
-            height: 105px;
-            border-radius: 28px;
-            background: #f5f5f7;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-        }
-
-        .nav-btn:hover {
-            background: var(--text-main);
-            color: #ffffff;
-            transform: translateY(-10px);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.08);
-        }
-
-        /* 배경 조명 효과 */
-        .ambient-light {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% 50%, #f0f4ff 0%, #ffffff 80%);
-            z-index: -1;
-        }
+        .ambient-light { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, #f0f4ff 0%, #ffffff 80%); z-index: -1; }
     </style>
 </head>
 <body>
@@ -131,23 +44,15 @@
 
     <main class="hero-container">
         <h1 class="welcome-title">세종캠퍼스고등학교<br>방문을 환영합니다</h1>
-        <p class="slogan-box">
-            저마다의 <b>빛깔</b>을 찾아 모두가 <b>특별</b>해지는 배움터
-        </p>
+        <p class="slogan-box">저마다의 <b>빛깔</b>을 찾아 모두가 <b>특별</b>해지는 배움터</p>
     </main>
 
     <nav>
-        <button onclick="window.open('https://www.schoolinfo.go.kr/ei/ss/Pneiss_b01_s0.do?SHL_IDF_CD=3aaa3131-652e-4ac3-9219-8e628f474f0e', 'pop1', 'width=1200,height=900,scrollbars=yes');" class="nav-btn">
-            학교정보
-        </button>
+        <button onclick="window.open('https://www.schoolinfo.go.kr/ei/ss/Pneiss_b01_s0.do?SHL_IDF_CD=3aaa3131-652e-4ac3-9219-8e628f474f0e', 'pop1', 'width=1200,height=900,scrollbars=yes');" class="nav-btn">학교정보</button>
         
-        <button onclick="window.open('https://github.com/user-attachments/files/27625351/map.pdf', 'pop2', 'width=1200,height=900,scrollbars=yes');" class="nav-btn">
-            교내배치도
-        </button>
+        <button onclick="window.open('map.pdf', 'pop2', 'width=1200,height=900,scrollbars=yes');" class="nav-btn">교내배치도</button>
         
-        <button onclick="window.open('https://sejongcampus.sjeduhs.kr/sejongcampus-h/main.do', 'pop3', 'width=1280,height=900,scrollbars=yes');" class="nav-btn">
-            홈페이지
-        </button>
+        <button onclick="window.open('https://sejongcampus.sjeduhs.kr/sejongcampus-h/main.do', 'pop3', 'width=1280,height=900,scrollbars=yes');" class="nav-btn">홈페이지</button>
     </nav>
 
 </body>
