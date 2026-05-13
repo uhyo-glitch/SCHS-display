@@ -84,18 +84,21 @@
             <button class="tab-btn" onclick="showFloor(4)">4층</button>
         </div>
         <div class="viewer">
-            <img src="map_1.jpg" id="img1" class="map-img active">
-            <img src="map_2.jpg" id="img2" class="map-img">
-            <img src="map_3.jpg" id="img3" class="map-img">
-            <img src="map_4.jpg" id="img4" class="map-img">
+            <!-- 말씀하신 .png 확장자를 정확히 적용하였습니다. -->
+            <img src="map_1.png" id="img1" class="map-img active">
+            <img src="map_2.png" id="img2" class="map-img">
+            <img src="map_3.png" id="img3" class="map-img">
+            <img src="map_4.png" id="img4" class="map-img">
         </div>
     </div>
 
     <script>
+        // 팝업 열기/닫기 제어
         function toggleMap(show) {
             document.getElementById('mapOverlay').style.display = show ? 'flex' : 'none';
         }
 
+        // 층별 이미지 전환
         function showFloor(n) {
             document.querySelectorAll('.map-img').forEach(i => i.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
