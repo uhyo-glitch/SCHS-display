@@ -1,3 +1,8 @@
+가장 안정적으로 작동하도록 조건문을 정리하고, 상하 정렬 및 10초 주기 전환을 완벽히 반영한 **최종 통합본 코드**입니다.
+
+기존 코드 전체를 지우시고 아래의 코드를 그대로 복사하여 덮어쓰기(Overwrite) 하시면 됩니다.
+
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,12 +21,23 @@
         header { width: 100%; padding-top: 80px; display: flex; justify-content: center; z-index: 10; }
         .logo-img { height: 75px; width: auto; }
 
-        /* 메인 문구 및 전환 효과 */
-        .hero-container { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 40px; transition: opacity 0.5s ease-in-out; }
+        /* 메인 문구 영역 - 로고와 버튼 사이의 정확한 세로 중간 정렬 */
+        .hero-container { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            padding: 40px; 
+            transition: opacity 0.5s ease-in-out;
+            min-height: 420px; /* 두 화면의 높이 차이로 인한 들썩임 방지 */
+            margin: auto 0;    /* 상하 남은 여백을 균등 분배하여 완벽한 정중앙 배치 */
+        }
         
-        /* 기존 환영 문구 및 행사명 공통 스타일 */
-        .welcome-title, .event-title { font-size: 6.8rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.04em; margin-bottom: 45px; word-break: keep-all; }
-        .event-title { font-size: 5.5rem; line-height: 1.2; } /* 행사명은 길이를 고려해 소폭 축소 */
+        /* 기존 환영 문구 및 행사명 공통 스타일 (시작점/끝점 고정) */
+        .welcome-title, .event-title { font-size: 6.8rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.04em; margin-bottom: 40px; word-break: keep-all; }
+        .event-title { font-size: 5.5rem; line-height: 1.2; }
         
         /* 기존 슬로건 스타일 */
         .slogan-box { font-size: 2.7rem; font-weight: 300; color: var(--text-sub); }
@@ -55,6 +71,7 @@
         <img src="https://github.com/user-attachments/assets/534ceff2-2513-463f-a7da-ab6bb231f47c" alt="세종캠퍼스고등학교" class="logo-img">
     </header>
     
+    <!-- 초기 메인 컨테이너 (첫 화면 원본 유지) -->
     <main class="hero-container" id="heroContainer">
         <h1 class="welcome-title">세종캠퍼스고등학교<br>방문을 환영합니다</h1>
         <p class="slogan-box">저마다의 <b>빛깔</b>을 찾아 모두가 <b>특별</b>해지는 배움터</p>
@@ -66,6 +83,7 @@
         <button onclick="window.open('https://sejongcampus.sjeduhs.kr/sejongcampus-h/main.do', 'pop3', 'width=1280,height=900');" class="nav-btn">홈페이지</button>
     </nav>
 
+    <!-- 배치도 팝업 -->
     <div id="mapOverlay">
         <div class="close-btn" onclick="toggleMap(false)">닫기 ✕</div>
         <div class="tabs">
@@ -91,8 +109,7 @@
             event.target.classList.add('active');
         }
 
-        // --- 순환 전개할 데이터 배열 ---
-        // type: "welcome"은 기존 양식, type: "event"는 신규 행사 양식으로 처리됩니다.
+        // --- 메인 화면 1개, 서브 화면 1개 고정 배치 ---
         const contents = [
             {
                 type: "welcome",
@@ -101,9 +118,9 @@
             },
             {
                 type: "event",
-                title: "여름방학 학력 증진 프로그램 및 2027년 선택교육과정 과목 신청 학생 설명회",
-                date: "2026. 6. 17.일(수) 15:40",
-                location: "1층 시청각실"
+                title: "여름방학 학력 증진 프로그램 및 2027년 선택교육과정 과목 신청 학생 설명회", // 여기에 원하는 서브 화면 행사명 입력
+                date: "2026. 6. 17.(수) [학생] 15:40~ [학부모] 18:30~",     // 여기에 일시 입력
+                location: "1층 시청각실"         // 여기에 장소 입력
             }
         ];
 
@@ -111,22 +128,20 @@
         const heroContainer = document.getElementById('heroContainer');
 
         function rotateContent() {
-            // 페이드 아웃
+            // 부드러운 페이드 아웃 효과 시작
             heroContainer.style.opacity = 0;
 
-            // 0.5초 후 콘텐츠 갱신 및 페이드 인
+            // 0.5초 애니메이션이 끝난 후 내부 텍스트 교체
             setTimeout(() => {
                 currentIndex = (currentIndex + 1) % contents.length;
                 const currentData = contents[currentIndex];
                 
                 if (currentData.type === "welcome") {
-                    // 기존 첫 화면 양식 적용
                     heroContainer.innerHTML = `
                         <h1 class="welcome-title">${currentData.title}</h1>
                         <p class="slogan-box">${currentData.slogan}</p>
                     `;
                 } else if (currentData.type === "event") {
-                    // 요청하신 신규 행사 안내 양식 적용
                     heroContainer.innerHTML = `
                         <h1 class="event-title">${currentData.title}</h1>
                         <div class="info-box">
@@ -136,13 +151,13 @@
                     `;
                 }
                 
-                // 페이드 인
+                // 부드러운 페이드 인 효과 시작
                 heroContainer.style.opacity = 1;
             }, 500);
         }
 
-        // 5초(5000ms)마다 콘텐츠 전환 함수를 실행합니다.
-        setInterval(rotateContent, 5000);
+        // [수정] 오작동 방지를 위해 개수 체크 조건문을 제거하고 무조건 10초(10000ms)마다 타이머를 실행합니다.
+        setInterval(rotateContent, 10000);
     </script>
 </body>
 </html>
