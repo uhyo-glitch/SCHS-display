@@ -16,11 +16,20 @@
         header { width: 100%; padding-top: 80px; display: flex; justify-content: center; z-index: 10; }
         .logo-img { height: 75px; width: auto; }
 
-        /* 메인 문구 */
-        .hero-container { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 40px; }
-        .welcome-title { font-size: 6.8rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.04em; margin-bottom: 45px; word-break: keep-all; }
+        /* 메인 문구 및 전환 효과 */
+        .hero-container { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 40px; transition: opacity 0.5s ease-in-out; }
+        
+        /* 기존 환영 문구 및 행사명 공통 스타일 */
+        .welcome-title, .event-title { font-size: 6.8rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.04em; margin-bottom: 45px; word-break: keep-all; }
+        .event-title { font-size: 5.5rem; line-height: 1.2; } /* 행사명은 길이를 고려해 소폭 축소 */
+        
+        /* 기존 슬로건 스타일 */
         .slogan-box { font-size: 2.7rem; font-weight: 300; color: var(--text-sub); }
         .slogan-box b { font-weight: 600; color: var(--accent-blue); }
+        
+        /* 행사 안내 정보 박스 스타일 */
+        .info-box { font-size: 2.5rem; font-weight: 400; color: var(--text-main); line-height: 1.6; text-align: left; display: inline-block; }
+        .info-box b { font-weight: 600; color: var(--accent-blue); margin-right: 10px; }
 
         /* 하단 버튼 */
         nav { width: 100%; padding-bottom: 110px; display: flex; justify-content: center; gap: 55px; z-index: 10; }
@@ -45,17 +54,18 @@
     <header>
         <img src="https://github.com/user-attachments/assets/534ceff2-2513-463f-a7da-ab6bb231f47c" alt="세종캠퍼스고등학교" class="logo-img">
     </header>
-    <main class="hero-container">
+    
+    <main class="hero-container" id="heroContainer">
         <h1 class="welcome-title">세종캠퍼스고등학교<br>방문을 환영합니다</h1>
         <p class="slogan-box">저마다의 <b>빛깔</b>을 찾아 모두가 <b>특별</b>해지는 배움터</p>
     </main>
+    
     <nav>
         <button onclick="window.open('https://www.schoolinfo.go.kr/ei/ss/Pneiss_b01_s0.do?SHL_IDF_CD=3aaa3131-652e-4ac3-9219-8e628f474f0e', 'pop1', 'width=1200,height=900');" class="nav-btn">학교정보</button>
         <button onclick="toggleMap(true)" class="nav-btn">교내배치도</button>
         <button onclick="window.open('https://sejongcampus.sjeduhs.kr/sejongcampus-h/main.do', 'pop3', 'width=1280,height=900');" class="nav-btn">홈페이지</button>
     </nav>
 
-    <!-- 배치도 팝업 -->
     <div id="mapOverlay">
         <div class="close-btn" onclick="toggleMap(false)">닫기 ✕</div>
         <div class="tabs">
@@ -65,7 +75,6 @@
             <button class="tab-btn" onclick="showFloor(4)">4층</button>
         </div>
         <div class="viewer">
-            <!-- 혹시 모를 경로 오류를 방지하기 위해 전체 주소를 다 적었습니다. -->
             <img src="https://uhyo-glitch.github.io/SCHS-display/map_1.png" id="img1" class="map-img active">
             <img src="https://uhyo-glitch.github.io/SCHS-display/map_2.png" id="img2" class="map-img">
             <img src="https://uhyo-glitch.github.io/SCHS-display/map_3.png" id="img3" class="map-img">
@@ -81,6 +90,65 @@
             document.getElementById('img' + n).classList.add('active');
             event.target.classList.add('active');
         }
+
+        // --- 순환 전개할 데이터 배열 ---
+        // type: "welcome"은 기존 양식, type: "event"는 신규 행사 양식으로 처리됩니다.
+        const contents = [
+            {
+                type: "welcome",
+                title: "세종캠퍼스고등학교<br>방문을 환영합니다",
+                slogan: "저마다의 <b>빛깔</b>을 찾아 모두가 <b>특별</b>해지는 배움터"
+            },
+            {
+                type: "event",
+                title: "2026학년도 신입생 오리엔테이션",
+                date: "2026년 2월 23일(월) 10:00",
+                location: "본교 대강당 (체육관)"
+            },
+            {
+                type: "event",
+                title: "학부모 초청 학교설명회 및<br>교육과정 안내",
+                date: "2026년 3월 11일(수) 14:00",
+                location: "시청각실 및 각 반 교실"
+            }
+        ];
+
+        let currentIndex = 0;
+        const heroContainer = document.getElementById('heroContainer');
+
+        function rotateContent() {
+            // 페이드 아웃
+            heroContainer.style.opacity = 0;
+
+            // 0.5초 후 콘텐츠 갱신 및 페이드 인
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % contents.length;
+                const currentData = contents[currentIndex];
+                
+                if (currentData.type === "welcome") {
+                    // 기존 첫 화면 양식 적용
+                    heroContainer.innerHTML = `
+                        <h1 class="welcome-title">${currentData.title}</h1>
+                        <p class="slogan-box">${currentData.slogan}</p>
+                    `;
+                } else if (currentData.type === "event") {
+                    // 요청하신 신규 행사 안내 양식 적용
+                    heroContainer.innerHTML = `
+                        <h1 class="event-title">${currentData.title}</h1>
+                        <div class="info-box">
+                            <p><b>- 일시:</b> ${currentData.date}</p>
+                            <p><b>- 장소:</b> ${currentData.location}</p>
+                        </div>
+                    `;
+                }
+                
+                // 페이드 인
+                heroContainer.style.opacity = 1;
+            }, 500);
+        }
+
+        // 5초(5000ms)마다 콘텐츠 전환 함수를 실행합니다.
+        setInterval(rotateContent, 5000);
     </script>
 </body>
 </html>
